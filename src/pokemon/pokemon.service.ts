@@ -83,8 +83,13 @@ constructor(
     return { ...Pokemon.toJSON(), ...updatePokemonDto };
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} pokemon`;
+  async remove(id: string) {
+    const Pokemon= await this.findOne(id);
+
+    await Pokemon.deleteOne();
+
+    throw console.log(`El Pokemon ${Pokemon.name} fue borrado correctamente`);
+
   }
 
     private handleExceptions( error: any ) {
