@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe } from '@nestjs/common';
 import { PokemonService } from './pokemon.service';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
+import { ParsemongoidPipe } from 'src/common/pipe/parsemongoid/parsemongoid.pipe';
 
 @Controller('pokemon')
 export class PokemonController {
@@ -28,7 +29,7 @@ export class PokemonController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParsemongoidPipe) id: string) {
     return this.pokemonService.remove(id);
   }
 }

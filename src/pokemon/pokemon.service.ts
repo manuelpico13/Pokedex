@@ -84,12 +84,15 @@ constructor(
   }
 
   async remove(id: string) {
-    const Pokemon= await this.findOne(id);
+    /*const Pokemon= await this.findOne(id);
 
     await Pokemon.deleteOne();
 
-    throw console.log(`El Pokemon ${Pokemon.name} fue borrado correctamente`);
+    throw console.log(`El Pokemon ${Pokemon.name} fue borrado correctamente`);*/
 
+    const {deletedCount} = await this.pokemonModel.deleteOne({_id: id});
+    if(deletedCount === 0)
+    throw new BadRequestException(`Pokemon with id "${id}" not found`)
   }
 
     private handleExceptions( error: any ) {
