@@ -23,7 +23,7 @@ import { JoiValidationSchema } from 'CONFIG/joi.validation';
       }),
 
       MongooseModule.forRoot(process.env.MONGODB,{
-        dbName: 'pokemondb '
+        dbName: 'pokemondb'
       }),
 
       PokemonModule,
